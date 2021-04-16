@@ -94,7 +94,31 @@ def login():
         my_token = create_access_token(identity=user.id)
         return jsonify({"token": my_token})
 
+@app.route("/protected", methods=['GET', 'POST'])
+    # protege ruta con esta funcion
+@jwt_required()
+def protected():
+    # busca la identidad del token
+    current_id = get_jwt_identity()
+    # busca usuarios en base de datos
+    user = User.query.get(current_id)
+    print(user)
+    return jsonify({"id": user.id, "email": user.email}), 200
 
+@app.route('/people', methods=['POST'])
+def people_user():
+    id = request.json.get("id", None)
+    name = request.json.get("name", None)
+    gender = request.json.get("gender", None)
+    eye_color = request.json.get("eye_color", None)
+    hair_color = request.json.get("hair_color", None)
+    birth = request.json.get("birth", None)
+    height = request.json.get("height", None)
+    skin_color= request.json.get("skin_color", None)
+    image_url = request.json.get("image_url", None)
+
+        return jsonify({"msg": "Show People"}), 200
+    
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
