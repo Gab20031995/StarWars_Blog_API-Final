@@ -63,6 +63,27 @@ class Planets(db.Model):
             # do not serialize the password, its a security breach
         }
 
+class Vehicles(db.Model):
+    # Here we define columns for the table person
+    # Notice that each column is also a normal Python instance attribute.
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(250), nullable=False)
+    passengers = db.Column(db.String(250), nullable=False)
+    model = db.Column(db.String(250), nullable=False)
+    length = db.Column(db.String(250), nullable=False)
+    capacity = db.Column(db.String(250), nullable=False)
+    image_url = db.Column(db.String(250), nullable=False)
+
+    def __repr__(self):
+        return '<Planets %r>' % self.email
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            # do not serialize the password, its a security breach
+        }   
+                    
 class Favorites(db.Model):
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
