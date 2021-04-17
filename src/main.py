@@ -9,7 +9,7 @@ from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
 from models import db, User, People, Planets, Favorites
-from flask_jwt_extended import create_access_token, JWTManager
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity, create_access_token
 
 #from models import Person
 
@@ -105,20 +105,29 @@ def protected():
     print(user)
     return jsonify({"id": user.id, "email": user.email}), 200
 
-@app.route('/people', methods=['POST'])
-def people_user():
-    id = request.json.get("id", None)
-    name = request.json.get("name", None)
-    gender = request.json.get("gender", None)
-    eye_color = request.json.get("eye_color", None)
-    hair_color = request.json.get("hair_color", None)
-    birth = request.json.get("birth", None)
-    height = request.json.get("height", None)
-    skin_color= request.json.get("skin_color", None)
-    image_url = request.json.get("image_url", None)
+@app.route('/people', methods=['GET'])
+def getPeople():
+    persona = Planets.query.all()
+    request = list(map(lambda persona:persona.serialize(),persona))    
+    return jsonify(request), 200
 
-        return jsonify({"msg": "Show People"}), 200
+@app.route('/planets', methods=['GET'])
+def getPlanets():
+    planeta = Planets.query.all()
+    request = list(map(lambda planeta:planeta.serialize(),planeta))    
+    return jsonify(request), 200
     
+@app.route('/vehicles', methods=['GET'])
+def getVehicles():
+    nave = Vehicles.query.all()
+    request = list(map(lambda nave:nave.serialize(),nave))    
+    return jsonify(request), 200    
+
+@app.route('/favorites', methods=['GET'])
+def getFavorites():
+    nave = Favorites.query.all()
+    request = list(map(lambda favorito:favorito.serialize(),favorito))    
+    return jsonify(request), 200      
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

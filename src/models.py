@@ -36,8 +36,8 @@ class People(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
+            "name": self.name,
+            "gender": self.gender,
         }
 
 class Planets(db.Model):
@@ -59,10 +59,10 @@ class Planets(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
+            "name": self.name,
+            "population": self.population,
         }
-
+  
 class Vehicles(db.Model):
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
@@ -75,38 +75,39 @@ class Vehicles(db.Model):
     image_url = db.Column(db.String(250), nullable=False)
 
     def __repr__(self):
-        return '<Planets %r>' % self.email
+        return '<Vehicles %r>' % self.email
 
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
-        }   
+            "name": self.name,
+            "passengers": self.passengers,
+        }
+  
+   
                     
 class Favorites(db.Model):
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(250), nullable=False)
-    peopler_id = db.Column(db.Integer, nullable=False)
+    people_id = db.Column(db.Integer, nullable=False)
     planets_id = db.Column(db.Integer, nullable=False)
     vehicles_id = db.Column(db.Integer, nullable=False)
-    # user_id = db.Column(db.Integer, "ForeignKey('user.id'))"
-    # user = relationship(user)
-    # people_id = db.Column(db.Integer, "ForeignKey('people.id'))"
-    # people = relationship(People)
-    # planets_id = db.Column(db.Integer, "ForeignKey('planets.id'))"
-    # planets = relationship(Planets)
-    # vehicles_id = db.Column(db.Integer, "ForeignKey('vehicles.id'))""
-    # vehicles = relationship(Vehicles)
+    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # user = db.relationship(user)
+    # people_id = db.Column(db.Integer, db.ForeignKey('people.id'))
+    # people = db.relationship(People)
+    # planets_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
+    # planets = db.relationship(Planets)
+    # vehicles_id = db.Column(db.Integer, db.ForeignKey('vehicles.id'))
+    # vehicles = db.relationship(Vehicles)
 
     def __repr__(self):
-        return '<Favorites %r>' % self.username
+        return '<Faborites %r>' % self.email
 
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
+         
         }
