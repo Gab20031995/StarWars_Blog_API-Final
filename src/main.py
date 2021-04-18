@@ -123,7 +123,7 @@ def getVehicles():
     request = list(map(lambda nave:nave.serialize(),nave))    
     return jsonify(request), 200    
 
-@app.route('/favorites', methods=['GET'])
+@app.route('/favorites', methods=['GET', 'POST'])
 def getFavorites():
     nave = Favorites.query.all()
     request = list(map(lambda favorito:favorito.serialize(),favorito))    

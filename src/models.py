@@ -94,14 +94,14 @@ class Favorites(db.Model):
     people_id = db.Column(db.Integer, nullable=False)
     planets_id = db.Column(db.Integer, nullable=False)
     vehicles_id = db.Column(db.Integer, nullable=False)
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    # user = db.relationship(user)
-    # people_id = db.Column(db.Integer, db.ForeignKey('people.id'))
-    # people = db.relationship(People)
-    # planets_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
-    # planets = db.relationship(Planets)
-    # vehicles_id = db.Column(db.Integer, db.ForeignKey('vehicles.id'))
-    # vehicles = db.relationship(Vehicles)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User")
+    people_id = db.Column(db.Integer, db.ForeignKey('people.id'))
+    people = db.relationship("People")
+    planets_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
+    planets = db.relationship("Planets")
+    vehicles_id = db.Column(db.Integer, db.ForeignKey('vehicles.id'))
+    vehicles = db.relationship("Vehicles")
 
     def __repr__(self):
         return '<Faborites %r>' % self.email
