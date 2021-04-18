@@ -126,9 +126,9 @@ def getVehicles():
 @app.route('/favorites', methods=['GET', 'POST','DELETE'])
 def getFavorites():
     if (request.method == "GET"):
-        favoritos = Favorites.query.all()
-        favoritos = list(map(lambda favoritos:favoritos.serialize(),favoritos)) 
-        return jsonify(request), 200
+        fav1 = Favorites.query.all()
+        favoritos = list(map(lambda favoritos:favoritos.serialize(),fav1)) 
+        return jsonify(favoritos), 200
 
     if (request.method == "POST"):
         return jsonify({"msg": "POST method"}), 200
