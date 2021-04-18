@@ -109,5 +109,9 @@ class Favorites(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "user": self.user,
+            "people_id": self.people_id,
+            "planets_id": self.planets_id,
+            "vehicles_id": self.vehicles_id,
          
         }

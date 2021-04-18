@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User, People, Planets, Favorites
+from models import db, User, People, Planets, Vehicles, Favorites
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity, create_access_token
 
 #from models import Person
@@ -107,7 +107,7 @@ def protected():
 
 @app.route('/people', methods=['GET'])
 def getPeople():
-    persona = Planets.query.all()
+    persona = People.query.all()
     request = list(map(lambda persona:persona.serialize(),persona))    
     return jsonify(request), 200
 
@@ -123,11 +123,18 @@ def getVehicles():
     request = list(map(lambda nave:nave.serialize(),nave))    
     return jsonify(request), 200    
 
-@app.route('/favorites', methods=['GET', 'POST'])
+@app.route('/favorites', methods=['GET', 'POST','DELETE'])
 def getFavorites():
-    nave = Favorites.query.all()
-    request = list(map(lambda favorito:favorito.serialize(),favorito))    
-    return jsonify(request), 200      
+    if (request.method == "GET"):
+        favoritos = Favorites.query.all()
+        favoritos = list(map(lambda favoritos:favoritos.serialize(),favoritos)) 
+        return jsonify(request), 200
+
+    if (request.method == "POST"):
+        return jsonify({"msg": "POST method"}), 200
+    
+    if (request.method == "DELETE"):
+        return jsonify({"msg": "DETELE method"}), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
