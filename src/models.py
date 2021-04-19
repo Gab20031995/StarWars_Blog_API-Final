@@ -38,7 +38,13 @@ class People(db.Model):
             "id": self.id,
             "name": self.name,
             "gender": self.gender,
-        }
+            "eye_color ": self.eye_color,
+            "hair_color": self.hair_color,
+            "birth": self.birth,
+            "height": self.height,
+            "skin_color": self.skin_color,
+            "image_url": self.image_url,
+             }
 
 class Planets(db.Model):
     # Here we define columns for the table person
@@ -61,7 +67,13 @@ class Planets(db.Model):
             "id": self.id,
             "name": self.name,
             "population": self.population,
-        }
+            "terrain": self.terrain,
+            "climate": self.climate,
+            "orbital_period": self.orbital_period,
+            "rotation_period": self.rotation_period,
+            "diameter": self.diameter,
+            "image_url": self.image_url,
+            }
   
 class Vehicles(db.Model):
     # Here we define columns for the table person
@@ -82,7 +94,11 @@ class Vehicles(db.Model):
             "id": self.id,
             "name": self.name,
             "passengers": self.passengers,
-        }
+            "model": self.model,
+            "length": self.length,
+            "capacity": self.capacity,
+            "image_url": self.image_url,
+            }
   
    
                     
