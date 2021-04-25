@@ -131,10 +131,20 @@ def getFavorites():
         return jsonify(favoritos), 200
 
     if (request.method == "POST"):
-        return jsonify({"msg": "POST method"}), 200
+        post_fav1 = Favorites.query.get()
+        post_fav1 = list(map(lambda favoritos:favoritos.serialize(),post_fav1))
+        post_fav1.user_id = "user_id"
+        db.session.commit()
+        return jsonify({"msg": "Favorite are included"}), 200
     
     if (request.method == "DELETE"):
-        return jsonify({"msg": "DETELE method"}), 200
+        delete_fav1 = Favorites.query.get()
+        delete_fav1 = list(map(lambda favoritos: favoritos.serialize(),delete_fav1))
+        favorites.delete()
+        db.session.commit()
+        return jsonify({"msg": "Favorite are deleted"}), 200 
+
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
