@@ -31,7 +31,7 @@ class People(db.Model):
     image_url = db.Column(db.String(250), nullable=False)
 
     def __repr__(self):
-        return '<People %r>' % self.email
+        return '<People %r>' % self.name
 
     def serialize(self):
         return {
@@ -60,7 +60,7 @@ class Planets(db.Model):
     image_url = db.Column(db.String(250), nullable=False)
 
     def __repr__(self):
-        return '<Planets %r>' % self.email
+        return '<Planets %r>' % self.name
 
     def serialize(self):
         return {
@@ -87,7 +87,7 @@ class Vehicles(db.Model):
     image_url = db.Column(db.String(250), nullable=False)
 
     def __repr__(self):
-        return '<Vehicles %r>' % self.email
+        return '<Vehicles %r>' % self.name
 
     def serialize(self):
         return {
@@ -106,10 +106,6 @@ class Favorites(db.Model):
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String(250), nullable=False)
-    people_id = db.Column(db.Integer, nullable=False)
-    planets_id = db.Column(db.Integer, nullable=False)
-    vehicles_id = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User")
     people_id = db.Column(db.Integer, db.ForeignKey('people.id'))
@@ -120,12 +116,12 @@ class Favorites(db.Model):
     vehicles = db.relationship("Vehicles")
 
     def __repr__(self):
-        return '<Faborites %r>' % self.email
+        return '<Faborites %r>' % self.user_id
 
     def serialize(self):
         return {
             "id": self.id,
-            "user": self.user,
+            "user": self.user.id,
             "people_id": self.people_id,
             "planets_id": self.planets_id,
             "vehicles_id": self.vehicles_id,

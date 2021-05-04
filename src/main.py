@@ -131,7 +131,7 @@ def getFavorites():
         return jsonify(favoritos), 200
 
     if (request.method == "POST"):
-        post_fav1 = Favorites.query.get()
+        post_fav1 = request.json.get() 
         post_fav1 = list(map(lambda favoritos:favoritos.serialize(),post_fav1))
         post_fav1.user_id = "user_id"
         db.session.commit()
